@@ -9,7 +9,7 @@ Created on Mon Mar 25 10:07:32 2019
 import requests
 import simplejson as json
 import matplotlib
-import matplotlib.pyplot as plt
+matplotlib.use('Agg')
 import pandas as pd
 from bokeh.plotting import figure, output_file, show
 from bokeh.resources import CDN
@@ -43,7 +43,6 @@ def df_one_month_closing_price(year,month,ticker):
     #p.line(df.index, df.Close, legend="Temp.", line_width=2)
     #show(p)
     
-    plt.ioff()
     ax = df.plot()
     fig = ax.get_figure()
     
