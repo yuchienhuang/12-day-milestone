@@ -8,8 +8,12 @@ Created on Mon Mar 25 10:07:32 2019
 
 import requests
 import simplejson as json
-import pandas as pd
 import matplotlib
+import matplotlib.pyplot as plt
+import pandas as pd
+from bokeh.plotting import figure, output_file, show
+from bokeh.resources import CDN
+from bokeh.embed import file_html
 
 
 
@@ -33,7 +37,13 @@ def df_one_month_closing_price(year,month,ticker):
     df = pd.DataFrame(r.json()['dataset']['data'],columns=['Date','Close'])
     df.set_index('Date',inplace = True)
     df.index = pd.to_datetime(df.index)
+
+    #output_file("lines.html")
+    #p = figure(title="simple line example", x_axis_label='Date', y_axis_label='Price')
+    #p.line(df.index, df.Close, legend="Temp.", line_width=2)
+    #show(p)
     
+    plt.ioff()
     ax = df.plot()
     fig = ax.get_figure()
     
