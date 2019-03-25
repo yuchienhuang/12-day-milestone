@@ -9,6 +9,7 @@ Created on Mon Mar 25 10:07:32 2019
 import requests
 import simplejson as json
 import pandas as pd
+import matplotlib
 
 
 
