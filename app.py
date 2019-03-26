@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, flash
+from flask import Flask, render_template, request, redirect, flash, url_for
 from wtforms import Form, TextField, TextAreaField, validators, StringField, SubmitField, SelectField
 from day10 import *
 import os
@@ -43,15 +43,18 @@ def about():
       img = io.BytesIO()
       fig = df_one_month_closing_price(2017,int(month),name)
       #fig.savefig(os.path.join(app.root_path, 'public/plot'))
-      fig.savefig(img, format='png')
-      img.seek(0)
-      plot_url = base64.b64encode(img.getvalue()).decode()
-      
-      #return '<img src="data:image/png;base64,{}">'.format(plot_url)
+      try:
+        fig.savefig(img, format='png')
+        img.seek(0)
+        plot_url = base64.b64encode(img.getvalue()).decode()
+        
+        #return '<img src="data:image/png;base64,{}">'.format(plot_url)
 
-      
-      return render_template('graph.html',plot_url=plot_url)
-      
+        
+        return render_template('graph.html', ticker = name, plot_url=plot_url)
+      except:
+        flash(fig)
+        return redirect(url_for('about'))
       
       
       # script, div = df_one_month_closing_price_v2(2017,12,'FB')

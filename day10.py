@@ -36,20 +36,22 @@ def df_one_month_closing_price(year,month,ticker):
     domain = 'https://www.quandl.com/api/v3/datasets/WIKI/'+ticker+'.json'
     
     r = requests.get(domain, params = queries)
-    
-    df = pd.DataFrame(r.json()['dataset']['data'],columns=['Date','Close'])
-    df.set_index('Date',inplace = True)
-    df.index = pd.to_datetime(df.index)
+    try:    
+        df = pd.DataFrame(r.json()['dataset']['data'],columns=['Date','Close'])
+        df.set_index('Date',inplace = True)
+        df.index = pd.to_datetime(df.index)
 
-    #output_file("lines.html")
-    #p = figure(title="simple line example", x_axis_label='Date', y_axis_label='Price')
-    #p.line(df.index, df.Close, legend="Temp.", line_width=2)
-    #show(p)
-    
-    ax = df.plot()
-    fig = ax.get_figure()
-    
-    return fig
+        #output_file("lines.html")
+        #p = figure(title="simple line example", x_axis_label='Date', y_axis_label='Price')
+        #p.line(df.index, df.Close, legend="Temp.", line_width=2)
+        #show(p)
+        
+        ax = df.plot()
+        fig = ax.get_figure()
+        
+        return fig
+    except:
+        return "no data for the ticker " + ticker
 
 # def df_one_month_closing_price_v2(year,month,ticker):
     
