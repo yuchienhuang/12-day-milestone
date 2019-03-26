@@ -11,9 +11,12 @@ import simplejson as json
 import matplotlib
 matplotlib.use('Agg')
 import pandas as pd
-from bokeh.plotting import figure, output_file, show
-from bokeh.resources import CDN
-from bokeh.embed import file_html
+# from bokeh.plotting import figure, output_file, show
+# from bokeh.resources import CDN
+# from bokeh.embed import file_html
+# from bokeh.models import ColumnDataSource
+# from bokeh.embed import components
+
 
 
 
@@ -48,5 +51,26 @@ def df_one_month_closing_price(year,month,ticker):
     
     return fig
 
+# def df_one_month_closing_price_v2(year,month,ticker):
     
+#     start_date, end_date = start_end_dates(year, month)
+    
+#     queries = dict(column_index=4, start_date = start_date, end_date = end_date, api_key = 'WV5TpJc_gfxiAAgHRb6M')
+#     domain = 'https://www.quandl.com/api/v3/datasets/WIKI/'+ticker+'.json'
+    
+#     r = requests.get(domain, params = queries)
+    
+#     df = pd.DataFrame(r.json()['dataset']['data'],columns=['Date','Close'])
+#     df.set_index('Date',inplace = True)
+#     df.index = pd.to_datetime(df.index)
+
+#     source = ColumnDataSource(df)
+
+#     p = figure(x_axis_type="datetime",x_axis_label='Date', y_axis_label='Closing Price', plot_width=800, plot_height=350)
+#     p.line('Date', 'Close', source=source,line_width=2)
+#     script, div = components(p)
+    
+
+    
+#     return script, div
    
